@@ -408,21 +408,6 @@ const openConfirmDelivery = (orderId, orderData, tokenName) => {
       "Open dispute for this order? Only buyer or seller can open a dispute.",
       async () => {
         await callTx("openDispute", orderId);
-
-        const res = await fetch("/api/mantle/publish", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-        eventName: "DisputeOpened",
-        payload: {
-        orderId: Number(orderId),
-        raisedBy: "0x82aD97bEf0b7E17b1D30f56e592Fc819E1eeDAfc"
-     }
-  }),
-});
-
-const data = await res.json();
-console.log(data);
       }
     );
   };
@@ -434,21 +419,6 @@ console.log(data);
       "Cancel this dispute only if there is a mutual agreement to cancel. Only the initiator of a dispute is allowed to cancel it.",
       async () => {
         await callTx("cancelDispute", orderId);
-
-        const res = await fetch("/api/mantle/publish", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-        eventName: "DisputeCancelled",
-        payload: {
-        orderId: Number(orderId),
-        cancelledBy: "0x82aD97bEf0b7E17b1D30f56e592Fc819E1eeDAfc"
-     }
-  }),
-});
-
-const data = await res.json();
-console.log(data);
       }
     );
   };

@@ -31,7 +31,6 @@ import InputModal from "./InputModal";
 import ChatModal from "./ChatModal";
 import { MARKETPLACE_ADDRESS, MARKETPLACE_ABI } from "../../lib/contract";
 import ViewReceiptModal from "./ViewReceiptModal";
-import MantleDisputeListener from "@/scripts/listener";
 
 export default function DisputesTab({ pushToast, TOKEN_LOGOS = {}, STATUS = [], darkMode }) {
   const { address, caipAddress, isConnected } = useAppKitAccount();
@@ -221,21 +220,6 @@ const paginated = useMemo(() => {
         const tx = await contract.cancelDispute(order.id);
         await tx.wait();
         pushToast?.("success", "Dispute cancelled");
-        
-        const res = await fetch("/api/mantle/publish", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-        eventName: "DisputeCancelled",
-        payload: {
-        orderId: Number(order.id),
-        cancelledBy: "0x82aD97bEf0b7E17b1D30f56e592Fc819E1eeDAfc"
-     }
-  }),
-});
-
-const data = await res.json();
-console.log(data);
 
       } catch (err) {
         console.log("cancelDispute err", err);
