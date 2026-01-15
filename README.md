@@ -1,1 +1,3 @@
-# TradeSeal
+TradeSeal is a decentralized RealFi settlement and escrow infrastructure built on Mantle’s smart contract stack, designed to tokenize real-world commercial transactions, invoices, and trade settlements—the most fundamental cash-flow assets in the global economy.
+TradeSeal replaces traditional trust-based trade processes with on-chain escrow, verifiable settlement, and immutable proof of execution. Each transaction generates a tokenized settlement record (invoice or receipt) stored on IPFS, with its cryptographic reference permanently recorded on-chain for transparency and auditability.
+By leveraging Mantle’s low-cost, high-throughput EVM environment, TradeSeal enables secure buyer–seller settlement, delayed release escrow, and programmable trade conditions, forming a compliant foundation for future invoice financing, yield distribution, and RWA composability across DeFi.

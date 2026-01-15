@@ -1,65 +1,171 @@
-import Image from "next/image";
+"use client";
+
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { useAppKitProvider, useAppKitAccount } from "@reown/appkit/react";
+import { BrowserProvider, Contract, formatUnits } from "ethers";
+import { MARKETPLACE_ADDRESS, MARKETPLACE_ABI } from "../lib/contract";
+import Link from "next/link";
+import ConnectButton from "@/context/walletConnect";
 
 export default function Home() {
+  const { address, caipAddress, isConnected } = useAppKitAccount();
+  const { walletProvider } = useAppKitProvider("eip155");
+  
+  const router = useRouter();
+
+  const [stats, setStats] = useState({
+    listings: 0,
+    orders: 0,
+    disputes: 0,
+  });
+
+  const [highlight, setHighlight] = useState({
+    listings: false,
+    orders: false,
+    disputes: false,
+  });
+
+  // Auto redirect for connected users (after short delay)
+  useEffect(() => {
+    if (walletProvider || isConnected) {
+      const timer = setTimeout(() => router.push("/dashboard"), 60000); 
+      return () => clearTimeout(timer);
+    }
+  }, [walletProvider, router]);
+
+  // Fetch stats + subscribe to events
+  useEffect(() => {
+    if (!walletProvider) return;
+    const provider = new BrowserProvider(walletProvider);
+    const contract = new Contract(MARKETPLACE_ADDRESS, MARKETPLACE_ABI, provider);
+
+    async function updateStats() {
+      try {
+        const listings = Number(await contract.listingCount());
+        const orders = Number(await contract.orderCount());
+
+        let disputes = 0;
+        for (let i = 0; i < orders; i++) {
+          const order = await contract.orders(i);
+          if (Number(order.status) === 5) disputes++;
+        }
+
+        setHighlight({
+          listings: listings !== stats.listings,
+          orders: orders !== stats.orders,
+          disputes: disputes !== stats.disputes,
+        });
+
+        setStats({ listings, orders, disputes });
+
+        setTimeout(() => {
+          setHighlight({ listings: false, orders: false, disputes: false });
+        }, 1500);
+      } catch (err) {
+        console.log("Error fetching stats:", err);
+      }
+    }
+
+    updateStats();
+
+  }, [walletProvider, stats]);
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.js file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <div className="relative min-h-screen flex flex-col overflow-hidden">
+      {/* bg */}
+      <div
+        className="absolute inset-0 bg-cover bg-center bg-fixed animate-zoom"
+        style={{ backgroundImage: "url(/images/bg2.jpg)" }}
+      />
+      <div className="absolute inset-0 bg-black/40 z-0" />
+
+     <div className="mt-[0.5cm] mb-[1cm] px-[1cm] flex justify-end">
+      <ConnectButton />
+     </div>
+
+      {/* Intro */}
+      <div className="relative z-10 flex flex-col items-center justify-center flex-1 text-center bg-[rgba(255,255,255,0.1)] backdrop-blur-md shadow-lg p-10 md:mx-[20%] mx-[5%] rounded-lg">
+        <h1 className="text-5xl md:text-6xl font-extrabold text-white drop-shadow-lg animate-fadeIn">
+          Welcome to <span className="text-gray-900">TradeSeal</span>
+        </h1>
+        <div className="mt-4 text-lg md:text-xl font-semibold text-gray-900 animate-fadeIn">
+          On-chain escrow and settlement infrastructure for real-world trade and cash-flow assets
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+        <p className="mt-4 text-lg text-white/90 max-w-2xl animate-fadeIn">
+          TradeSeal is a decentralized RealFi settlement and escrow infrastructure built on Mantle's smart contract stack, designed to tokenize real-world commercial transactions, invoices, and trade settlements — the most fundamental cash-flow assets in the global economy.
+        </p>
+        <div className="my-8 flex gap-4 animate-slideUp">
+          <button
+            onClick={() => router.push("/dashboard")}
+            className="px-6 py-3 bg-gray-800 cursor-pointer hover:bg-gray-900 text-white font-semibold rounded-xl shadow-lg transition-all transform hover:-translate-y-1 hover:scale-105"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            Go to Dashboard
+          </button>
+          <Link href="https://github.com/mrpatrick030/SDS-Enhanced-TradeSeal/blob/main/README.md" target="_blank"><button
+            className="px-6 py-3 border-2 border-white text-white cursor-pointer font-semibold rounded-xl shadow-lg hover:bg-white hover:text-black transition-all transform hover:-translate-y-1 hover:scale-105"
           >
-            Documentation
-          </a>
+            Learn More
+          </button>
+          </Link>
         </div>
-      </main>
+      </div>
+
+
+      {/* Stats */}
+      <div className="relative z-10 py-12 px-6">
+        <h2
+          className="text-center text-2xl font-bold text-white mb-8 animate-fadeIn"
+          style={{ textShadow: "2px 2px 10px #fff" }}
+        >
+          Marketplace Overview
+        </h2>
+        
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+          {/* Listings */}
+          <div
+            className={`statCol p-6 rounded-xl bg-gradient-to-br from-gray-900 to-gray-700 shadow-lg text-center transform transition ${
+              highlight.listings
+                ? "animate-pulse border-2 border-gray-200"
+                : "hover:scale-105"
+            }`}
+          >
+            <h3 className="text-4xl font-bold text-white">{isConnected ? stats.listings : 0}</h3>
+            <p className="mt-2 text-white/90">
+              {stats.listings === 1 ? "Total Listing" : "Total Listings"}
+            </p>
+          </div>
+
+          {/* Orders */}
+          <div
+            className={`statCol p-6 rounded-xl bg-gradient-to-br from-blue-900 to-blue-700 shadow-lg text-center transform transition ${
+              highlight.orders
+                ? "animate-pulse border-2 border-gray-200"
+                : "hover:scale-105"
+            }`}
+          >
+            <h3 className="text-4xl font-bold text-white">{isConnected ? stats.orders : 0}</h3>
+            <p className="mt-2 text-white/90">
+              {stats.orders === 1 ? "Active Order" : "Active Orders"}
+            </p>
+          </div>
+
+          {/* Disputes */}
+          <div
+            className={`statCol p-6 rounded-xl bg-gradient-to-br from-red-700 to-red-500 shadow-lg text-center transform transition ${
+              highlight.disputes
+                ? "animate-pulse border-2 border-gray-200"
+                : "hover:scale-105"
+            }`}
+          >
+            <h3 className="text-4xl font-bold text-white">{isConnected ? stats.disputes : 0}</h3>
+            <p className="mt-2 text-white/90">
+              {stats.disputes === 1 ? "Disputed Order" : "Disputed Orders"}
+            </p>
+          </div>
+        </div>
+        
+      </div>
     </div>
   );
 }
