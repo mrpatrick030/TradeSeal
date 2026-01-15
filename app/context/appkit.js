@@ -11,7 +11,7 @@ const projectId = "72456eacc1ba1725ce8dda069d57bbbc";
 const metadata = {
   name: 'TradeSeal',
   description: 'Tokenize real-world commercial invoices and trade settlements as verifiable on-chain NFT Receipts',
-  url: 'https://tradeseal.vercel.app',
+  url: 'https://trade-seal.vercel.app',
   icons: ['https://supposed-emerald-snake.myfilebase.com/ipfs/QmXmU2JWfS6Epjbq9nQQA8Rf6WRJG2aj7tLWWBWkm61AjC']
 }
 
