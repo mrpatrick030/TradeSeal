@@ -4,8 +4,8 @@ async function main() {
   const [deployer] = await hre.ethers.getSigners();
 
   // deployed contract addresses
-  const MARKETPLACE_ADDRESS = "0x0562eEB4Cd1AF649ffa18f4f3a1A50F2D7899f6e";
-  const RECEIPT_NFT_ADDRESS = "0xf86470d61b01aE6546C08814ACeec442E42625Dc";
+  const MARKETPLACE_ADDRESS = "0xA3b05E5Fe445F34E2F14683430F5eB6Cc5EE81B0";
+  const RECEIPT_NFT_ADDRESS = "0x0628D6F7D69546C9a520e583968A1aaFe530A99A";
 
   console.log("Linking ReceiptNFT to Marketplace...");
   console.log("Deployer:", deployer.address);
