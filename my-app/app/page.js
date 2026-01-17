@@ -118,7 +118,7 @@ export default function Home() {
           className="text-center text-2xl font-bold text-white mb-8 animate-fadeIn"
           style={{ textShadow: "2px 2px 10px #fff" }}
         >
-          Marketplace Overview
+          Overview
         </h2>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
