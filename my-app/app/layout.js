@@ -1,6 +1,6 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import AppKitClient from "@/components/AppKitClient";
+import { AppKit } from "@/context/appkit";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -12,20 +12,13 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata = {
-  title: "TradeSeal",
-  description:
-    "Tokenize real-world commercial invoices and trade settlements as verifiable on-chain NFT Receipts",
-};
-
+export const metadata = { title: "TradeSeal", description: "Tokenize real-world commercial invoices and trade settlements as verifiable on-chain NFT Receipts" };
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen bg-gray-50`}
-      >
-        <AppKitClient>{children}</AppKitClient>
-      </body>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen bg-gray-50`}><AppKit>{children}</AppKit></body>
     </html>
   );
 }
+
+

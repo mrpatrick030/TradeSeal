@@ -23,6 +23,11 @@ createAppKit({
   projectId,
   features: {
     analytics: true,
+    email: false,
+    socials: false,
+    wallets: {
+      coinbase: false, // ❌ disable Coinbase
+    },
   },
   themeMode: "dark",
       themeVariables: {
