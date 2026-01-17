@@ -54,7 +54,7 @@ Merchants(sellers), buyers, and platforms requiring trustless escrow, dispute re
 ```
 TradeSeal/
 
-├── app/
+├── my-app/
 │   ├── api/
 │   │   ├── uploadNFTMetadata/route.js
 │   ├── dashboard/
@@ -304,6 +304,14 @@ openDispute(uint256 orderId);
 **Analytics Dashboard**
 
 ![Analytics](https://supposed-emerald-snake.myfilebase.com/ipfs/QmNhbexE1mb2CsVw8fSjhni7KempjDiMX1TDocHmVB3MTz)
+
+---
+
+**Commercial Listings — Merchant Trade Offers**
+
+Merchants publish goods or services as trade listings, enabling on-chain settlement through escrow-backed stablecoin payments.
+
+![Listings](https://supposed-emerald-snake.myfilebase.com/ipfs/QmeMxKUuL5wnDptMVkDLgHkBvEV95ShKKzRYyWFFFAow3Y)
 
 ---
 
