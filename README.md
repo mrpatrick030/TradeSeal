@@ -45,7 +45,7 @@ Feature Description
 ---
 
 **Who TradeSeal Serves:**
-Merchants, buyers, and platforms requiring trustless escrow, dispute resolution, and verifiable settlement for real-world commerce.
+Merchants(sellers), buyers, and platforms requiring trustless escrow, dispute resolution, and verifiable settlement for real-world commerce.
 
 ---
 
@@ -287,7 +287,25 @@ confirmDelivery(uint256 orderId);
 openDispute(uint256 orderId);
 ```
 
+---
 
+**Order Lifecycle / Escrow status**
+
+![Order status](https://supposed-emerald-snake.myfilebase.com/ipfs/QmdB3nDxW9noPftkNCuQ5LKZ38WmGQAMfVij9VvpDXCrBL)
+
+---
+
+**NFT Receipt**
+
+![Receipt](https://supposed-emerald-snake.myfilebase.com/ipfs/QmTqUTJrSdZwuX2HkWziwpCv2oFoy2AAkcazViLzqx7Kts)
+
+---
+
+**Analytics Dashboard**
+
+![Analytics](https://supposed-emerald-snake.myfilebase.com/ipfs/QmNhbexE1mb2CsVw8fSjhni7KempjDiMX1TDocHmVB3MTz)
+
+---
 
 ## 🚀 Setup & Deployment
 
