@@ -42,6 +42,11 @@ Feature Description
 
 ---
 
+**Who TradeSeal Serves:**
+Merchants, buyers, and platforms requiring trustless escrow, dispute resolution, and verifiable settlement for real-world commerce.
+
+---
+
 🧱 Architecture
 
 ```
