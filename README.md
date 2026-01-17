@@ -24,12 +24,19 @@ TradeSeal empowers merchants, buyers, and underbanked participants with trustles
 Feature Description
 
 🔐 Escrow‑Based Settlement Funds locked on‑chain until delivery conditions are met
+
 🧾 Tokenized Trade Receipts Orders, invoices, and resolutions minted as NFTs
+
 ⚖️ Dispute Resolution - Mediator‑driven resolution with on‑chain outcomes
+
 💬 Transaction Chat Session‑based buyer–seller–mediator communication
+
 📦 Order Lifecycle Clear states from order request → settlement
+
 🪙 Stablecoin Payments - USDC / USDT / DAI compatible
+
 🌐 RealFi Ready Designed for compliant, real‑world commerce 💡 AI Insights - Analytics powered by OpenAI GPT-4.1 mini
+
 🎨 UX - Dark/light mode, animations, search, pagination, filters, drag and drop, and responsive layout
 
 
@@ -37,7 +44,9 @@ Feature Description
 
 🧱 Architecture
 
+```
 TradeSeal/
+
 ├── app/
 │   ├── api/
 │   │   ├── uploadNFTMetadata/route.js
@@ -70,25 +79,25 @@ TradeSeal-Hardhat-Files
 │   └── deployNFT.js
 │   └── linkReceiptNFT.js
 └── README.md
-
+```
 
 ---
 
 **🔁 Trade Settlement Flow**
 
-1. Trade Initiation
+1. Trade Initiation - 
 Buyer initiates a trade specifying quantity and delivery terms.
 
-2. Escrow Funding
+2. Escrow Funding - 
 Buyer deposits stablecoins into escrow.
 
-3. Fulfillment
+3. Fulfillment - 
 Seller ships goods or delivers services.
 
-4. Confirmation & Settlement
+4. Confirmation & Settlement - 
 Buyer confirms delivery → escrow funds released.
 
-5. Receipt Minting
+5. Receipt Minting - 
 A Trade Receipt NFT is minted as immutable proof.
 
 
@@ -138,18 +147,16 @@ Used for:
 
 In TradeSeal, a trade settlement represents the final on‑chain resolution of a commercial transaction, where:
 
-Delivery is confirmed or
-
-A dispute is resolved
+Delivery is confirmed or a dispute is resolved
 
 
 Once settlement occurs:
 
-Funds are released accordingly
+Funds are released accordingly.
 
-The transaction becomes a finalized cash‑flow record
+The transaction becomes a finalized cash‑flow record.
 
-A receipt NFT is permanently issued
+A receipt NFT is permanently issued.
 
 
 
@@ -160,7 +167,9 @@ A receipt NFT is permanently issued
 Contract Purpose
 
 TradeSeal.sol - Core escrow, trade lifecycle, dispute logic
+
 ReceiptNFT.sol - Minting trade & resolution receipts
+
 StableTokens - Mock USDC / USDT / DAI
 
 
@@ -318,10 +327,15 @@ npm run dev
 Layer Tools
 
 Frontend - Modular front end with Next.js, TailwindCSS, Framer Motion, Lucide-React
+
 Blockchain - Mantle Sepolia (EVM)
+
 Contracts - Solidity, Hardhat, Ethers.js
+
 Storage - IPFS / Metadata Anchoring
+
 Wallet - EVM Wallets through AppKit (MetaMask)
+
 AI - OpenAI GPT-4.1 mini
 
 
