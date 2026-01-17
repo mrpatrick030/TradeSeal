@@ -35,7 +35,9 @@ Feature Description
 
 🪙 Stablecoin Payments - USDC / USDT / DAI compatible
 
-🌐 RealFi Ready Designed for compliant, real‑world commerce 💡 AI Insights - Analytics powered by OpenAI GPT-4.1 mini
+🌐 RealFi Ready Designed for compliant, real‑world commerce 
+
+💡 AI Insights (Non-custodial) — Read-only analytics and summaries generated from on-chain trade data (does not influence settlement logic)
 
 🎨 UX - Dark/light mode, animations, search, pagination, filters, drag and drop, and responsive layout
 
@@ -146,7 +148,8 @@ Used for:
 
 - Coordinating delivery
 
-
+**Order Flow Chart**
+![Flow chart](https://supposed-emerald-snake.myfilebase.com/ipfs/QmVhoFSSaSXijRFrNz545ArMMDGBuH2pvMPiaHwtcmvaxp)
 
 🧾 What Is a Trade Settlement?
 
@@ -183,13 +186,7 @@ StableTokens - Mock USDC / USDT / DAI
 
 🧠 Why TradeSeal Is RealFi
 
-Represents real‑world commercial value
-
-Produces verifiable cash‑flow records
-
-Enables compliant settlement logic
-
-Bridges off‑chain commerce with on‑chain finance
+TradeSeal turns completed orders, invoices, and dispute outcomes into auditable, on-chain cash-flow records, aligning with RealFi principles of transparency, compliance readiness, and financial composability.
 
 
 TradeSeal can later integrate:
