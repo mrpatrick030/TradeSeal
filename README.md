@@ -148,10 +148,13 @@ Used for:
 
 - Coordinating delivery
 
+---
+
 **Order Flow Chart**
 
 ![Flow chart](https://supposed-emerald-snake.myfilebase.com/ipfs/QmVhoFSSaSXijRFrNz545ArMMDGBuH2pvMPiaHwtcmvaxp)
 
+---
 
 🧾 What Is a Trade Settlement?
 
